@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Pick</title>
+</head>
+<body>
+    <h1>Random Unseen Pick</h1>
+
+    <!-- Form to insert a movie and rating -->
+    <form id="insertMovieForm">
+        <label for="movieName">Movie Name:</label>
+        <input type="text" id="movieName" name="MovieName" required>
+        
+        <label for="movieRating">Rating:</label>
+        <input type="number" id="movieRating" name="Rating" required min="1" max="10">
+        
+        <button type="submit">Insert Movie</button>
+    </form>
+
+    <!-- Form to insert a manga and rating -->
+    <form id="insertMangaForm">
+        <label for="mangaName">Manga Name:</label>
+        <input type="text" id="mangaName" name="MangaName" required>
+        
+        <label for="mangaRating">Rating:</label>
+        <input type="number" id="mangaRating" name="Rating" required min="1" max="10">
+        
+        <button type="submit">Insert Manga</button>
+    </form>
+
+    <!-- Form to insert an unseen movie -->
+    <form id="insertUnseenMovieForm">
+        <label for="unseenMovieName">Movie Name:</label>
+        <input type="text" id="unseenMovieName" name="MovieName" required>
+        
+        <button type="submit">Insert Unseen Movie</button>
+    </form>
+
+    <!-- Form to insert an unseen manga -->
+    <form id="insertUnseenMangaForm">
+        <label for="unseenMangaName">Manga Name:</label>
+        <input type="text" id="unseenMangaName" name="MangaName" required>
+        
+        <button type="submit">Insert Unseen Manga</button>
+    </form>
+
+    <!-- Random unseen pick functionality will go here -->
+    <button onclick="location.href='userInterface.html'">Back to Main Menu</button>
+    <script src="script0.js"></script>
+    
+    <script>
+        // JavaScript to handle form submission for inserting a movie and rating
+        document.getElementById('insertMovieForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/addMovie', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Handle the response (e.g., display a success message or clear the form)
+                if (data.success) {
+                    alert('Movie inserted successfully!');
+                    // Clear the form if needed
+                    document.getElementById('movieName').value = '';
+                    document.getElementById('movieRating').value = '';
+                } else {
+                    alert('Failed to insert movie.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // JavaScript to handle form submission for inserting a manga and rating
+        document.getElementById('insertMangaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/addManga', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Handle the response (e.g., display a success message or clear the form)
+                if (data.success) {
+                    alert('Manga inserted successfully!');
+                    // Clear the form if needed
+                    document.getElementById('mangaName').value = '';
+                    document.getElementById('mangaRating').value = '';
+                } else {
+                    alert('Failed to insert manga.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // JavaScript to handle form submission for inserting an unseen movie
+        document.getElementById('insertUnseenMovieForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/addUnseenMovie', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Handle the response (e.g., display a success message or clear the form)
+                if (data.success) {
+                    alert('Unseen movie inserted successfully!');
+                    // Clear the form if needed
+                    document.getElementById('unseenMovieName').value = '';
+                } else {
+                    alert('Failed to insert unseen movie.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // JavaScript to handle form submission for inserting an unseen manga
+        document.getElementById('insertUnseenMangaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/addUnseenManga', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Handle the response (e.g., display a success message or clear the form)
+                if (data.success) {
+                    alert('Unseen manga inserted successfully!');
+                    // Clear the form if needed
+                    document.getElementById('unseenMangaName').value = '';
+                } else {
+                    alert('Failed to insert unseen manga.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
